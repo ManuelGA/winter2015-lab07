@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+My Order , healthy one. delivery too lazy to walk
+-->
+
+<!DOCTYPE order SYSTEM 'bonanza.dtd'>
+
+<order type="delivery">
+    <customer>Manuel</customer>
+    <delivery>Leave it by the door, money under the mat</delivery>
+    <burger>
+        <patty type="turkey"/>
+        <cheeses top="swiss"/>
+        <topping type="lettuce"/>
+        <topping type="tomato"/>
+        <topping type="shrooms"/>
+        <topping type="avocado"/>
+        <sauce type="ketchup"/>
+        <sauce type="mustard"/>
+        <instructions> not too much ketchup, please</instructions>
+        <name>You should try it</name>
+    </burger>
+    <burger>
+        <patty type="vege"/>
+        <topping type="lettuce"/>
+        <topping type="tomato"/>
+        <topping type="shrooms"/>
+        <topping type="avocado"/>
+        <sauce type="relish"/>
+    </burger>    
+</order>
