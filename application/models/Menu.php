@@ -22,7 +22,7 @@ class Menu extends CI_Model {
 
 
         // build a full list of patties - approach 2
-        foreach ($this->$xml->patties->patty as $patty) {
+        foreach ($this->xml->patties->patty as $patty) {
             $record = new stdClass();
             $record->code = (string) $patty['code'];
             $record->name = (string) $patty;
@@ -30,28 +30,28 @@ class Menu extends CI_Model {
             $patties[$record->code] = $record;
         }
         
-          foreach ($this->$xml->cheeses->cheese as $cheese) {
+          foreach ($this->xml->cheeses->cheese as $cheese) {
             $record = new stdClass();
             $record->code = (string) $cheese['code'];
             $record->name = (string) $cheese;
             $record->price = (float) $cheese['price'];
-            $cheeses[$record->code] = $record;
+            $this->cheeses[$record->code] = $record;
         }
         
-          foreach ($this->$xml->toppings->topping as $topping) {
+          foreach ($this->xml->toppings->topping as $topping) {
             $record = new stdClass();
             $record->code = (string) $topping['code'];
             $record->name = (string) $topping;
             $record->price = (float) $topping['price'];
-            $toppings[$record->code] = $record;
+            $this->toppings[$record->code] = $record;
         }
         
-          foreach ($this->$xml->sauces->sauce as $sauce) {
+          foreach ($this->xml->sauces->sauce as $sauce) {
             $record = new stdClass();
             $record->code = (string) $sauce['code'];
             $record->name = (string) $sauce;
             $record->price = (float) $sauce['price'];
-            $sauces[$record->code] = $record;
+            $this->sauces[$record->code] = $record;
         }
     }
 
@@ -67,7 +67,7 @@ class Menu extends CI_Model {
     
 
     // retrieve a cheese record, perhaps for pricing
-    function getchesse($code) {
+    function getCheese($code) {
         if (isset($this->cheeses[$code]))
             return $this->cheeses[$code];
         else
@@ -83,7 +83,7 @@ class Menu extends CI_Model {
     }
     
     // retrieve a patty sauce, perhaps for pricing
-    function gerSauce($code) {
+    function getSauce($code) {
         if (isset($this->sauces[$code]))
             return $this->sauces[$code];
         else

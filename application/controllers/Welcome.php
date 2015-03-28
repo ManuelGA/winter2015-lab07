@@ -66,9 +66,24 @@ class Welcome extends Application {
     function order($filename)
     {
 	// Build a receipt for the chosen order
-	
-	// Present the list to choose from
-	$this->data['pagebody'] = 'justone';
+        $receipttop = $this->orders->getOrderData($filename);
+        $this->data['ordernum'] = $receipttop['ordernum'];
+        $this->data['customer'] = $receipttop['customer'];
+        $this->data['order-type'] = $receipttop['order-type'];
+        $this->data['special'] = $receipttop['special'];
+        
+        $burgers = $this->orders->getBurgers($filename);
+        $totalorder = 0;
+        
+        for ($i = 0; $i < count($burgers); $i++)
+        {
+            $burgers[$i]['price'] = $this->orders->getBurgerPrice($burgers[$i]);
+            $totalorder += $burgers[$i]['price'];
+        }	
+        
+	$this->data['burgers'] = $burgers;
+        $this->data['total'] = $totalorder;
+        $this->data['pagebody'] = 'justone';
 	$this->render();
     }
     
