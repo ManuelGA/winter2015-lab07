@@ -21,7 +21,7 @@ class Welcome extends Application {
     function index()
     {
 	// Build a list of orders
-	$files = firectory_map('./data/');        
+	$files = directory_map(DATAPATH);        
         
         foreach ($files as $file)
         {
