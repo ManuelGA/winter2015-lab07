@@ -65,7 +65,7 @@ class Welcome extends Application {
 
     function order($filename)
     {
-	// Build a receipt for the chosen order
+	// header for the order
         $receipttop = $this->orders->getOrderData($filename);
         
         $this->data['ordernum'] = $receipttop['ordernum'];
@@ -84,6 +84,7 @@ class Welcome extends Application {
         $burgers = $this->orders->getBurgers($filename);
         $totalorder = 0;
         
+        //get every burger content
         for ($i = 0; $i < count($burgers); $i++)
         {
             $burgers[$i]['price'] = $this->orders->getBurgerPrice($burgers[$i]);
@@ -115,6 +116,9 @@ class Welcome extends Application {
                  $burgers[$i]['bottom-cheese'] = ' - ';
             }
             
+            $burgers[$i]['toppingss'] = $this->getToppings($burgers[$i]['topping']);
+            $burgers[$i]['saucess'] = $this->getSauces($burgers[$i]['sauce']);
+                       
             if (empty($burgers[$i]['instructions']))
             {
                 $burgers[$i]['instructions'] = ' - ';
@@ -127,5 +131,41 @@ class Welcome extends Application {
 	$this->render();
     }
     
-
+    //get a list of toppings names
+    function getToppings($toppingss)
+    {
+        $toppings = "";
+        foreach($toppingss as $topping)
+        {
+            $toppings .= $this->menu->getTopping($topping)->name . ', ';
+        }
+        
+        if (empty($toppings))
+        {
+            $toppings = ' - ';
+        }
+        else
+            $toppings = substr($toppings, 0, -2);
+        
+       return $toppings;
+    }
+    
+    // get a list of sauces names
+    function getSauces($saucess)
+    {
+        $sauces = "";
+        foreach($saucess as $sauce)
+        {
+            $sauces .= $this->menu->getSauce($sauce)->name . ', ';
+        }
+        
+        if (empty($sauces))
+        {
+            $sauces = ' - ';
+        }
+        else
+            $sauces = substr($sauces, 0, -2);
+        
+       return $sauces;
+    }
 }

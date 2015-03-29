@@ -15,6 +15,7 @@ class Orders extends CI_Model
             parent::__construct();
         }
 
+        //get burgers form the order
         function getBurgers($file)
         {
             $this->xml = simplexml_load_file(DATAPATH.$file.'.xml');
@@ -52,7 +53,8 @@ class Orders extends CI_Model
 
         }
         
-         function getBurgerPrice($burgercontent)
+        //get price for a burger
+        function getBurgerPrice($burgercontent)
         {
             $price = 0;
             
@@ -70,20 +72,27 @@ class Orders extends CI_Model
             {
                 $price += $this->menu->getCheese($burgercontent['bottom-cheese'])->price;
             }
-
-            foreach ($burgercontent['topping'] as $topping)
+            
+            if (isset($burgercontent['topping']))
             {
-                $price += $this->menu->getTopping($topping)->price;
+                foreach ($burgercontent['topping'] as $topping)
+                {
+                    $price += $this->menu->getTopping($topping)->price;
+                }
             }
-
-            foreach ($burgercontent['sauce'] as $sauce)
+            
+            if (isset($burgercontent['sauce']))
             {
-                $price += $this->menu->getSauce($sauce)->price;
+                foreach ($burgercontent['sauce'] as $sauce)
+                {
+                    $price += $this->menu->getSauce($sauce)->price;
+                }
             }
         
             return $price;
         }
         
+        //get extra order info
         function getOrderData($file)
         {
             $this->xml = simplexml_load_file(DATAPATH.$file.'.xml');
