@@ -56,31 +56,29 @@ class Orders extends CI_Model
         {
             $price = 0;
             
-            $spatty = $this->menu->getPatty($burgercontent['patty']);
-            $price += $spatty['price'];
+            if (isset($burgercontent['patty']))
+            {
+                $price += $this->menu->getPatty($burgercontent['patty'])->price;
+            }
         
             if (isset($burgercontent['top-cheese']))
             {
-                $stcheese = $this->menu->getCheese($burgercontent['top-cheese']);
-                $price += $stcheese['price'];
+                $price += $this->menu->getCheese($burgercontent['top-cheese'])->price;
             }
             
             if (isset($burgercontent['bottom-cheese']))
             {
-                $sbcheese = $this->menu->getCheese($burgercontent['bottom-cheese']);
-                $price += $sbcheese['price'];
+                $price += $this->menu->getCheese($burgercontent['bottom-cheese'])->price;
             }
 
             foreach ($burgercontent['topping'] as $topping)
             {
-                $stopping = $this->menu->getTopping($topping);
-                $price += $stopping['price'];
+                $price += $this->menu->getTopping($topping)->price;
             }
 
             foreach ($burgercontent['sauce'] as $sauce)
             {
-                $ssauce = $this->menu->getSauce($sauce);
-                $price += $ssauce['price'];
+                $price += $this->menu->getSauce($sauce)->price;
             }
         
             return $price;

@@ -67,10 +67,19 @@ class Welcome extends Application {
     {
 	// Build a receipt for the chosen order
         $receipttop = $this->orders->getOrderData($filename);
+        
         $this->data['ordernum'] = $receipttop['ordernum'];
         $this->data['customer'] = $receipttop['customer'];
         $this->data['order-type'] = $receipttop['order-type'];
-        $this->data['special'] = $receipttop['special'];
+        if (empty($receipttop['special']))
+        {
+            $this->data['special'] = ' - ';
+        }
+        else
+        {
+            $this->data['special'] = $receipttop['special'];
+        }
+        
         
         $burgers = $this->orders->getBurgers($filename);
         $totalorder = 0;
@@ -79,6 +88,37 @@ class Welcome extends Application {
         {
             $burgers[$i]['price'] = $this->orders->getBurgerPrice($burgers[$i]);
             $totalorder += $burgers[$i]['price'];
+            
+            if (isset( $burgers[$i]['patty']))
+            {
+                $burgers[$i]['patty'] = $this->menu->getPatty($burgers[$i]['patty'])->name;
+            }
+            else
+            {
+                 $burgers[$i]['patty'] = ' - ';
+            }
+            
+            if (isset( $burgers[$i]['top-cheese']))
+            {
+                $burgers[$i]['top-cheese'] = $this->menu->getCheese($burgers[$i]['top-cheese'])->name;
+            }
+            else
+            {
+                 $burgers[$i]['top-cheese'] = ' - ';
+            }
+            if (isset( $burgers[$i]['bottom-cheese']))
+            {
+                $burgers[$i]['bottom-cheese'] = $this->menu->getCheese($burgers[$i]['bottom-cheese'])->name;
+            }
+            else
+            {
+                 $burgers[$i]['bottom-cheese'] = ' - ';
+            }
+            
+            if (empty($burgers[$i]['instructions']))
+            {
+                $burgers[$i]['instructions'] = ' - ';
+            }
         }	
         
 	$this->data['burgers'] = $burgers;

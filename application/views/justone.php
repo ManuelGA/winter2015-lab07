@@ -1,22 +1,22 @@
 <div class="row">
-    <h3>{ordernum}</h3>
-    <h4> Customer: {customer}</h4>
-    <h4> Order type: {order-type} </h4>
-    <b>Special Instructions: <i>{special}</i></b>
+    <h4>{ordernum}</h4>
+    <b> Customer:</b> {customer} </br>
+    <b> Order type:</b> {order-type} </br> 
+    <b>Special Instructions:</b> {special}
     <hr>
     <br/>
     {burgers}
     <i>{name}</i>
     <br/>
     <ul>
-        <li>Base: {patty}</li>
-        <li>Top cheese: {top-cheese}</li>
-        <li>Bottom cheese: {bottom-cheese}</li>
-        <li>Topping(s): {topping}</li>
-        <li>Sauce(s): {sauce}</li>
-        <li>Instructions: {instructions}</li>
+        <li><b>Base:</b> {patty}</li>
+        <li><b>Top cheese:</b> {top-cheese}</li>
+        <li><b>Bottom cheese:</b> {bottom-cheese}</li>
+        <li><b>Topping(s):</b> {toppingss}</li>
+        <li><b>Sauce(s):</b> {saucess}</li>
+        <li><b>Instructions:</b> {instructions}</li>
         <br/>
-        <b>Burger Price: ${price}</b>
+        <b><b>Burger Price:</b> ${price}</b>
     </ul>
     <br/>
     {/burgers}
